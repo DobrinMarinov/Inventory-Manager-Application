@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="/js/jquery-3.1.0.min.js"></script>
+    <script src="/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
+    <link rel="stylesheet" href="/bootstrap-3.3.7/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/stylesheet.css"/>
+
+    <title>Inventory Manager Application</title>
+</head>
+<body ng-app="myApp">
+
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="col-lg-12">
+            Inventory Manager App
+        </h1>
+    </div>
+
+    <div ng-controller="namesCtrl">
+
+        <table ng-show="showTable" class="table" border="1" width="100%">
+
+            <tr>
+                <th ng-click="orderByMe('name'); sortReverse = !sortReverse">Name</th>
+                <th ng-click="orderByMe('type'); sortReverse = !sortReverse">Type</th>
+                <th ng-click="orderByMe('quantity'); sortReverse = !sortReverse">Quantity</th>
+                <th ng-click="orderByMe('singlePrice'); sortReverse = !sortReverse">Single Price</th>
+                <th>Action</th>
+
+            </tr>
+            <tr ng-repeat="x in names | orderBy:myOrderBy">
+                <td>{{x.name}}</td>
+                <td>{{x.type}}</td>
+                <td>{{x.quantity}}</td>
+                <td>{{x.singlePrice}}</td>
+                <td><span ng-click="viewItem($index)">edit</span></td>
+            </tr>
+        </table>
+        <!--<div ng-show="showDetails">Selected Item is {{selectedItem.name}}</div>-->
+        <!--<div ng-show="showDetails">Selected Item is {{selectedItem.type}}</div>-->
+
+        <table ng-show="showDetails" class="table" border="1" width="100%">
+            <tr>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>TYPE</th>
+                <th>SIZE</th>
+                <th>QUANTITY</th>
+                <th>DESCRIPTION</th>
+                <th>PRICE</th>
+            </tr>
+            <tr>
+                <td>{{selectedItem.id}}</td>
+                <td>{{selectedItem.name}}</td>
+                <td>{{selectedItem.type}}</td>
+                <td>{{selectedItem.size}}</td>
+                <td>{{selectedItem.quantity}}</td>
+                <td>{{selectedItem.description}}</td>
+                <td>{{selectedItem.singlePrice}}</td>
+            </tr>
+        </table>
+
+        <div ng-show="showAddButton"><button>Add new item</button></div>
+
+
+
+    </div>
+
+</div>
+
+</body>
+</html>
